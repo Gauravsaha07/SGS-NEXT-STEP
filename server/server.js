@@ -6,6 +6,8 @@ import colors from "colors"
 // Local Imports
 import connectDB from "./config/dbConfig.js"
 import authRoutes from "./routes/authRoutes.js"
+import adminRoutes from "./routes/adminRoutes.js"
+import counselorRoutes from "./routes/counselorRoutes.js"
 import errorHandler from "./middleware/errorHandler.js"
 
 
@@ -21,18 +23,26 @@ connectDB()
 app.use(express.json())
 app.use(express.urlencoded())
 
-app.get("/" , (req,res) => {
+app.get("/", (req, res) => {
     res.status(200).json({
-        message : "WELCOME TO SGS NEXT STEP API 5.11"
+        message: "WELCOME TO SGS NEXT STEP API 5.11"
     })
 })
 
 
-//Auth Routes
-app.use("/api/auth" , authRoutes)
+// Auth Routes
+app.use("/api/auth", authRoutes)
 
+
+// Admin Routes
+app.use("/api/admin" , adminRoutes)
+
+// Counselor Route
+app.use("/api/counselor" , counselorRoutes)
+
+// Error Handler
 app.use(errorHandler)
 
-app.listen(PORT , () => {
+app.listen(PORT, () => {
     console.log(`SERVER IS RUNNING AT PORT : ${PORT}`.bgGreen.black)
 })
