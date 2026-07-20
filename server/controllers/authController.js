@@ -1,6 +1,8 @@
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import User from "../models/userModel.js"
+import fs from "node:fs"
+import uploadToCloudinary from "../middleware/cloudinaryMiddleware.js"
 
 const registerUser = async (req, res) => {
 
@@ -12,6 +14,7 @@ const registerUser = async (req, res) => {
         throw new Error("SGS - Please Fill All Details!")
     }
 
+    // Check If Phone = 10
     if (phone.length != 10) {
         res.status(409)
         throw new Error('SGS - Invalid Phone Number')
@@ -25,10 +28,15 @@ const registerUser = async (req, res) => {
         throw new Error('SGS - User Already Exist')
     }
 
-
+    // Hash Password
     const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync(password, salt);
+    const hashedPassword = bcrypt.hashSync(password, salt); 
 
+    // Upload To Cloudinary
+    let uploadResult = await uploadToCloudinary(req.file.path)
+
+    // Remove From Server
+    fs.unlinkSync(req.file.path)
 
     const user = await User.create({
         name,
@@ -36,7 +44,8 @@ const registerUser = async (req, res) => {
         phone,
         password: hashedPassword,
         qualification,
-        location
+        location,
+        profilePic : uploadResult.secure_url
     })
 
     if (!user) {
@@ -55,12 +64,12 @@ const registerUser = async (req, res) => {
         credits: user.credits,
         isActive: user.isActive,
         userSince: user.createdAt,
+        profilePic : user.profilePic,
         token: generateToken(user._id)
     })
-
 }
 
-const loginUser = async (req, res) => {
+const loginUser = async (req, res) => { 
 
     const { email, password } = req.body
 
