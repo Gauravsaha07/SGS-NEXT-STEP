@@ -2,8 +2,8 @@ import jwt from "jsonwebtoken"
 import User from "../models/userModel.js"
 
 const forUser = async (req, res, next) => {
-    let token
     try {
+        let token
         if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
             token = req.headers.authorization.split(" ")[1]
             let decoded = jwt.verify(token, process.env.JWT_SECRET)
@@ -12,41 +12,42 @@ const forUser = async (req, res, next) => {
             next()
         } else {
             res.status(401)
-            throw new Error('SGS - Unauthorised Access')
+            throw new Error("Unauthorised Access")
         }
     } catch (error) {
         res.status(401)
-        throw new Error('SGS - Unauthorised Access')
+        throw new Error("Unauthorised Access")
     }
 }
 
 const forAdmin = async (req, res, next) => {
-    let token
     try {
+        let token
         if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
             token = req.headers.authorization.split(" ")[1]
             let decoded = jwt.verify(token, process.env.JWT_SECRET)
             let user = await User.findById(decoded.id).select("-password")
-            req.user = user
-            if (user.userType = "ADMIN") {
+            if (user.userType === "ADMIN") {
                 req.user = user
                 next()
             } else {
                 res.status(401)
-                throw new Error('SGS - Admin Only Access')
+                throw new Error("Admin Only Access")
             }
         } else {
             res.status(401)
-            throw new Error('SGS - Unauthorised Access')
+            throw new Error("Unauthorised Access")
         }
     } catch (error) {
         res.status(401)
-        throw new Error('SGS - Unauthorised Access')
+        throw new Error("Unauthorised Access")
     }
 }
 
+
 const protect = {
-    forUser , forAdmin
+    forUser, forAdmin
 }
+
 
 export default protect

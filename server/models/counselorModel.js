@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 const counselorSchema = new mongoose.Schema({
-
     category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Category"
+        ref: "Category",
+        required: true
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -18,17 +18,17 @@ const counselorSchema = new mongoose.Schema({
     isActive: {
         type: Boolean,
         default: false,
-        req: true
+        required: true
     },
     isAvailable: {
         type: Boolean,
         default: true,
-        req: true
+        required: true
     },
-    status : {
-        type : String,
-        enum : ["accepted" , "pending" , "rejected"],
-        default : "pending"
+    status: {
+        type: String,
+        enum: ["accepted", "pending", "rejected"],
+        default: "pending"
     }
 
 }, {
@@ -36,6 +36,7 @@ const counselorSchema = new mongoose.Schema({
 })
 
 
-const Counselor = mongoose.model("Counselor" , counselorSchema)
+const Counselor = mongoose.model("Counselor", counselorSchema)
+
 
 export default Counselor

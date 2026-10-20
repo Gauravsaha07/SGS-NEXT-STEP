@@ -1,58 +1,56 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-
     name: {
-        type : String,
-        required : [true , "Please Fill Name!"]
+        type: String,
+        required: [true, "Please Fill Name!"]
     },
     email: {
-        type : String,
-        unique : true,
-        required : [true , "Please Fill E-mail!"]
+        type: String,
+        unique: true,
+        required: [true, "Please Fill Email!"]
     },
     phone: {
-        type : String,
-        unique : true,
-        required : [true , "Please Fill Phone Number!"]
+        type: String,
+        unique: true,
+        required: [true, "Please Fill Phone!"]
     },
     password: {
-        type : String,
-        required : [true , "Please Fill Password!"]
+        type: String,
+        required: [true, "Please Fill Password!"]
     },
     userType: {
-        type : String,
-        require : true,
-        enum : ["STUDENT" , "COUNSELOR" , "ADMIN"],
-        default : "STUDENT"
+        type: String,
+        required: true,
+        enum: ["STUDENT", "COUNSELOR", "ADMIN"],
+        default: "STUDENT"
     },
     isActive: {
-        type : Boolean,
-        required : true,
-        default : true
+        type: Boolean,
+        required: true,
+        default: true
     },
     qualification: {
-        type : String,
-        required : [true , "Please Fill Qualification!"]
+        type: String,
+        required: [true, "Please Fill Qualification!"]
     },
     location: {
-        type : String,
-        required : [true , "Please Fill Location!"]
+        type: String,
+        required: [true, "Please Fill Location!"]
     },
     credits: {
-        type : Number,
-        default : 5,
-        required : true
+        type: Number,
+        default: 5,
+        required: true
     },
-    profilePic : {
-        type : String,
-        required : true
+    profilePic: {
+        type: String,
+        required: true,
     }
-
 }, {
     timestamps: true
 })
 
-const User = mongoose.model("User" , userSchema)
+const User = mongoose.model("User", userSchema)
 
 export default User

@@ -4,10 +4,13 @@ const categorySchema = new mongoose.Schema({
 
     title: {
         type: String,
-        required: [true, "SGS - Please Fill All Details"]
+        required: [true, "Please Enter Category Title!"]
     }
 
+}, {
+    timestamps: true
 })
+
 
 const Category = mongoose.model("Category", categorySchema)
 

@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const careerSchema = new mongoose.Schema({
     category: {
@@ -8,26 +8,29 @@ const careerSchema = new mongoose.Schema({
     },
     title: {
         type: String,
-        required: [true, "SGS - Please Fill Career Title!"]
+        required: [true, "Please Enter Career Title!"]
     },
     description: {
         type: String,
-        required: [true, "SGS - Please Fill Description!"]
+        required: [true, "Please Enter Description!"]
     },
     requiredQualification: {
         type: String,
-        required: [true, "SGS - Please Fill Required Qualification!"]
+        required: [true, "Please Enter Required Qualification!"]
     },
     duration: {
         type: String,
-        required: [true, "SGS - Please Fill Duration!"]
+        required: [true, "Please Enter Duration!"]
     },
     salary: {
         type: String,
-        required: [true, "SGS - Please Fill Up Salary!"]
+        required: [true, "Please Enter Career Title!"]
     }
+}, {
+    timestamps: true
 })
 
-const Career = mongoose.model("Career" , careerSchema)
+
+const Career = mongoose.model("Career", careerSchema)
 
 export default Career
