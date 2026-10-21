@@ -9,7 +9,7 @@ export default function StatusBadge({ text, status = 'info' }) {
 
   return (
     <span
-      class={`inline-block font-mono text-[11px] uppercase tracking-wider px-2.5 py-0.5 border-2 shadow-pop-sm rounded-full ${styles[status]}`}
+      className={`inline-block font-mono text-[11px] uppercase tracking-wider px-2.5 py-0.5 border-2 shadow-pop-sm rounded-full ${styles[status]}`}
     >
       {text}
     </span>

@@ -75,46 +75,46 @@ export default function CareerExplorer() {
   ];
 
   return (
-    <div class="min-h-screen bg-parchment flex flex-col">
+    <div className="min-h-screen bg-parchment flex flex-col">
       <Navbar activePage="explorer" />
 
-      <div class="flex-1 flex">
+      <div className="flex-1 flex">
         <Sidebar activeTab="explorer" role="student" />
 
-        <main class="flex-1 p-8 bg-grid-pattern overflow-y-auto">
+        <main className="flex-1 p-8 bg-grid-pattern overflow-y-auto">
           {/* Header Banner */}
-          <div class="mb-8">
-            <div class="inline-block bg-yellow border-3 border-navy px-3 py-1 rounded-full shadow-pop-sm font-mono text-xs font-bold text-navy mb-2">
+          <div className="mb-8">
+            <div className="inline-block bg-yellow border-3 border-navy px-3 py-1 rounded-full shadow-pop-sm font-mono text-xs font-bold text-navy mb-2">
               CAREER DIRECTORY 2026
             </div>
-            <h1 class="font-grotesk font-extrabold text-3xl text-navy">
-              Explore High-Growth <span class="text-rust">Careers in India</span>
+            <h1 className="font-grotesk font-extrabold text-3xl text-navy">
+              Explore High-Growth <span className="text-rust">Careers in India</span>
             </h1>
-            <p class="font-body text-sm text-navy-muted mt-1">
+            <p className="font-body text-sm text-navy-muted mt-1">
               Compare salary benchmarks, required skills, and market demand for Indian graduates.
             </p>
           </div>
 
           {/* Search & Filter Bar */}
-          <div class="bg-parchment-card border-4 border-navy rounded-3xl p-6 shadow-pop mb-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div class="md:col-span-2">
-                <label class="block font-grotesk font-bold text-xs uppercase text-navy mb-1">
+          <div className="bg-parchment-card border-4 border-navy rounded-3xl p-6 shadow-pop mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="md:col-span-2">
+                <label className="block font-grotesk font-bold text-xs uppercase text-navy mb-1">
                   Search Career Title or Skill
                 </label>
                 <input
                   type="text"
                   defaultValue="Full-Stack Engineer"
                   placeholder="Search by title (e.g., Python, IAS, Design)..."
-                  class="w-full bg-parchment border-3 border-navy rounded-xl px-4 py-2.5 font-body text-sm text-navy shadow-pop-sm focus:outline-none"
+                  className="w-full bg-parchment border-3 border-navy rounded-xl px-4 py-2.5 font-body text-sm text-navy shadow-pop-sm focus:outline-none"
                 />
               </div>
 
               <div>
-                <label class="block font-grotesk font-bold text-xs uppercase text-navy mb-1">
+                <label className="block font-grotesk font-bold text-xs uppercase text-navy mb-1">
                   Industry Field
                 </label>
-                <select class="w-full bg-parchment border-3 border-navy rounded-xl px-3 py-2.5 font-body text-sm text-navy shadow-pop-sm focus:outline-none">
+                <select className="w-full bg-parchment border-3 border-navy rounded-xl px-3 py-2.5 font-body text-sm text-navy shadow-pop-sm focus:outline-none">
                   <option>All Domains</option>
                   <option>Software & IT</option>
                   <option>Data & AI</option>
@@ -124,10 +124,10 @@ export default function CareerExplorer() {
               </div>
 
               <div>
-                <label class="block font-grotesk font-bold text-xs uppercase text-navy mb-1">
+                <label className="block font-grotesk font-bold text-xs uppercase text-navy mb-1">
                   Expected Salary
                 </label>
-                <select class="w-full bg-parchment border-3 border-navy rounded-xl px-3 py-2.5 font-body text-sm text-navy shadow-pop-sm focus:outline-none">
+                <select className="w-full bg-parchment border-3 border-navy rounded-xl px-3 py-2.5 font-body text-sm text-navy shadow-pop-sm focus:outline-none">
                   <option>Any Salary Range</option>
                   <option>₹4L - ₹8L / year</option>
                   <option>₹8L - ₹15L / year</option>
@@ -138,32 +138,32 @@ export default function CareerExplorer() {
           </div>
 
           {/* Careers Grid */}
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {careers.map((career) => (
               <Card key={career.id} color="white" className="flex flex-col justify-between hover:translate-y-[-2px] transition-all">
                 <div>
-                  <div class="flex justify-between items-start mb-3">
+                  <div className="flex justify-between items-start mb-3">
                     <StatusBadge text={career.badge} status="success" />
-                    <span class="font-mono text-[11px] font-bold text-navy-muted bg-parchment-dim px-2 py-0.5 rounded border border-navy">
+                    <span className="font-mono text-[11px] font-bold text-navy-muted bg-parchment-dim px-2 py-0.5 rounded border border-navy">
                       {career.openings}
                     </span>
                   </div>
 
-                  <h3 class="font-grotesk font-extrabold text-xl text-navy mb-1">{career.title}</h3>
-                  <p class="font-mono text-xs font-bold text-rust mb-3">{career.category}</p>
+                  <h3 className="font-grotesk font-extrabold text-xl text-navy mb-1">{career.title}</h3>
+                  <p className="font-mono text-xs font-bold text-rust mb-3">{career.category}</p>
 
-                  <div class="bg-yellow/30 border-2 border-navy p-2.5 rounded-xl mb-4">
-                    <div class="font-mono text-[10px] font-bold text-navy-muted uppercase">Avg. Starting Package</div>
-                    <div class="font-grotesk font-extrabold text-lg text-navy">{career.salary}</div>
+                  <div className="bg-yellow/30 border-2 border-navy p-2.5 rounded-xl mb-4">
+                    <div className="font-mono text-[10px] font-bold text-navy-muted uppercase">Avg. Starting Package</div>
+                    <div className="font-grotesk font-extrabold text-lg text-navy">{career.salary}</div>
                   </div>
 
-                  <p class="font-body text-xs text-navy-muted mb-4">{career.description}</p>
+                  <p className="font-body text-xs text-navy-muted mb-4">{career.description}</p>
 
-                  <div class="mb-4">
-                    <div class="font-grotesk font-bold text-xs text-navy mb-2">Required Core Skills:</div>
-                    <div class="flex flex-wrap gap-1.5">
+                  <div className="mb-4">
+                    <div className="font-grotesk font-bold text-xs text-navy mb-2">Required Core Skills:</div>
+                    <div className="flex flex-wrap gap-1.5">
                       {career.skills.map((sk, idx) => (
-                        <span key={idx} class="bg-parchment border border-navy text-navy font-mono text-[10px] font-bold px-2 py-0.5 rounded-full">
+                        <span key={idx} className="bg-parchment border border-navy text-navy font-mono text-[10px] font-bold px-2 py-0.5 rounded-full">
                           {sk}
                         </span>
                       ))}
@@ -171,7 +171,7 @@ export default function CareerExplorer() {
                   </div>
                 </div>
 
-                <div class="pt-4 border-t-2 border-navy/20 flex space-x-2">
+                <div className="pt-4 border-t-2 border-navy/20 flex space-x-2">
                   <Button variant="outline" size="sm" className="flex-1">
                     View Detail
                   </Button>

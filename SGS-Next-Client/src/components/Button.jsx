@@ -1,4 +1,4 @@
-export default function Button({ children, variant = 'primary', size = 'md', className = '' }) {
+export default function Button({ children, variant = 'primary', size = 'md', className = '', type = 'button', clickAction = () => { } }) {
   const variantStyles = {
     primary: 'bg-yellow text-navy hover:bg-yellow-fixed border-3 border-navy shadow-pop',
     secondary: 'bg-teal text-white hover:bg-teal/90 border-3 border-navy shadow-pop',
@@ -15,8 +15,9 @@ export default function Button({ children, variant = 'primary', size = 'md', cla
 
   return (
     <button
-      type="button"
-      class={`font-grotesk tracking-wide rounded-full transition-all active:translate-x-1 active:translate-y-1 active:shadow-none ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
+      onClick={clickAction}
+      type={type}
+      className={`font-grotesk tracking-wide rounded-full transition-all active:translate-x-1 active:translate-y-1 active:shadow-none ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
     >
       {children}
     </button>

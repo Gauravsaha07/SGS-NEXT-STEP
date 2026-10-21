@@ -61,30 +61,30 @@ export default function RoadmapResult() {
   ];
 
   return (
-    <div class="min-h-screen bg-parchment flex flex-col">
+    <div className="min-h-screen bg-parchment flex flex-col">
       <Navbar activePage="roadmap" />
 
-      <div class="flex-1 flex">
+      <div className="flex-1 flex">
         <Sidebar activeTab="roadmap" role="student" />
 
-        <main class="flex-1 p-8 bg-grid-pattern overflow-y-auto">
+        <main className="flex-1 p-8 bg-grid-pattern overflow-y-auto">
           {/* Header Banner */}
-          <div class="bg-yellow border-4 border-navy rounded-3xl p-8 shadow-pop mb-8 relative">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div className="bg-yellow border-4 border-navy rounded-3xl p-8 shadow-pop mb-8 relative">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div>
-                <div class="flex items-center space-x-3 mb-2">
+                <div className="flex items-center space-x-3 mb-2">
                   <StatusBadge text="AI GENERATED PATH" status="success" />
-                  <span class="font-mono text-xs font-bold text-navy-muted">GENERATED ON: 24 JUL 2026</span>
+                  <span className="font-mono text-xs font-bold text-navy-muted">GENERATED ON: 24 JUL 2026</span>
                 </div>
-                <h1 class="font-grotesk font-extrabold text-3xl text-navy">
+                <h1 className="font-grotesk font-extrabold text-3xl text-navy">
                   Full-Stack Web Engineer Roadmap
                 </h1>
-                <p class="font-body text-sm text-navy-muted mt-1">
-                  Target Role: <span class="font-bold text-navy">Full-Stack Developer</span> • Estimated Timeline: <span class="font-bold text-rust">6 Months</span> • Target Package: <span class="font-bold text-navy">₹8L - ₹15L / yr</span>
+                <p className="font-body text-sm text-navy-muted mt-1">
+                  Target Role: <span className="font-bold text-navy">Full-Stack Developer</span> • Estimated Timeline: <span className="font-bold text-rust">6 Months</span> • Target Package: <span className="font-bold text-navy">₹8L - ₹15L / yr</span>
                 </p>
               </div>
 
-              <div class="flex items-center space-x-3">
+              <div className="flex items-center space-x-3">
                 <Button variant="outline" size="md">
                   📥 Export PDF
                 </Button>
@@ -96,42 +96,42 @@ export default function RoadmapResult() {
           </div>
 
           {/* Timeline Phases */}
-          <div class="space-y-6 max-w-5xl">
+          <div className="space-y-6 max-w-5xl">
             {phases.map((p, idx) => (
-              <div key={idx} class="bg-parchment-card border-4 border-navy rounded-3xl p-6 shadow-pop relative">
+              <div key={idx} className="bg-parchment-card border-4 border-navy rounded-3xl p-6 shadow-pop relative">
                 {/* Connecting Line Indicator */}
                 {idx < phases.length - 1 && (
-                  <div class="hidden lg:block absolute left-8 -bottom-7 w-1 h-7 bg-navy"></div>
+                  <div className="hidden lg:block absolute left-8 -bottom-7 w-1 h-7 bg-navy"></div>
                 )}
 
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4 pb-4 border-b-2 border-navy/20">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4 pb-4 border-b-2 border-navy/20">
                   <div>
-                    <div class="font-mono text-xs font-bold text-rust uppercase tracking-wider">{p.phase}</div>
-                    <h2 class="font-grotesk font-extrabold text-xl text-navy mt-0.5">{p.title}</h2>
+                    <div className="font-mono text-xs font-bold text-rust uppercase tracking-wider">{p.phase}</div>
+                    <h2 className="font-grotesk font-extrabold text-xl text-navy mt-0.5">{p.title}</h2>
                   </div>
                   <StatusBadge text={p.status} status={p.badgeStatus} />
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <div class="bg-parchment border-2 border-navy p-4 rounded-2xl">
-                    <h3 class="font-grotesk font-bold text-xs text-navy uppercase mb-2">Key Skills & Learning Goals:</h3>
-                    <ul class="space-y-1.5 font-body text-xs text-navy">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div className="bg-parchment border-2 border-navy p-4 rounded-2xl">
+                    <h3 className="font-grotesk font-bold text-xs text-navy uppercase mb-2">Key Skills & Learning Goals:</h3>
+                    <ul className="space-y-1.5 font-body text-xs text-navy">
                       {p.topics.map((t, i) => (
-                        <li key={i} class="flex items-start space-x-2">
-                          <span class="text-rust font-bold">•</span>
+                        <li key={i} className="flex items-start space-x-2">
+                          <span className="text-rust font-bold">•</span>
                           <span>{t}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div class="bg-sky/20 border-2 border-navy p-4 rounded-2xl flex flex-col justify-between">
+                  <div className="bg-sky/20 border-2 border-navy p-4 rounded-2xl flex flex-col justify-between">
                     <div>
-                      <h3 class="font-grotesk font-bold text-xs text-navy uppercase mb-2">Milestone Project:</h3>
-                      <p class="font-grotesk font-extrabold text-sm text-navy">🛠️ {p.project}</p>
+                      <h3 className="font-grotesk font-bold text-xs text-navy uppercase mb-2">Milestone Project:</h3>
+                      <p className="font-grotesk font-extrabold text-sm text-navy">🛠️ {p.project}</p>
                     </div>
-                    <div class="mt-4 pt-2 border-t border-navy/20 flex justify-between items-center">
-                      <span class="font-mono text-[10px] font-bold text-navy-muted">Recommended: 15 hrs/wk</span>
+                    <div className="mt-4 pt-2 border-t border-navy/20 flex justify-between items-center">
+                      <span className="font-mono text-[10px] font-bold text-navy-muted">Recommended: 15 hrs/wk</span>
                       <Button variant="primary" size="sm">
                         Mark Phase Done
                       </Button>

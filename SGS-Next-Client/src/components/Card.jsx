@@ -9,7 +9,7 @@ export default function Card({ children, className = '', color = 'white' }) {
 
   return (
     <div
-      class={`border-3 border-navy shadow-pop p-6 rounded-2xl ${bgStyles[color] || 'bg-parchment-card'} ${className}`}
+      className={`border-3 border-navy shadow-pop p-6 rounded-2xl ${bgStyles[color] || 'bg-parchment-card'} ${className}`}
     >
       {children}
     </div>

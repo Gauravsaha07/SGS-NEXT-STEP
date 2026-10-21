@@ -3,96 +3,100 @@ import Sidebar from '../components/Sidebar';
 import Card from '../components/Card';
 import Button from '../components/Button';
 import StatusBadge from '../components/StatusBadge';
+import ChatPage from './ChatPage';
+import ChatBubble from '../components/ChatBubble';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { setMessage } from '../features/admin/adminSlice';
+import { useMutation } from '@tanstack/react-query';
+import adminService from '../services/adminService';
+import toast from 'react-hot-toast';
+import LoadingScreen from '../components/LoadingScreen';
+
 
 export default function AdminAiAssistant() {
+
+  const dispatch = useDispatch()
+
+  //  { id: 101, sender: 'Dr. Ramesh Kumar', time: '10:15 AM', message: 'Namaste Aarav! I reviewed your GitHub repository for the Next.js e-commerce app.', isSelf: false }
+
+  const { user } = useSelector(state => state.auth)
+  const { messages } = useSelector(state => state.admin)
+
+  const { mutate, data, isPending, isSuccess, isError, error } = useMutation({ mutationFn: (credentials) => adminService.askQuestion(credentials) })
+
+  const [text, setText] = useState("")
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    mutate({
+      token: user.token,
+      text: text
+    })
+    dispatch(setMessage({ id: crypto.randomUUID(), sender: 'Admin', time: new Date(Date.now()).toLocaleTimeString('EN-IN'), message: text, isSelf: true }))
+
+    setText("")
+  }
+
+
+  useEffect(() => {
+
+    if (isSuccess && data) {
+      dispatch(setMessage({ id: crypto.randomUUID(), sender: 'A.I', time: new Date(Date.now()).toLocaleTimeString('EN-IN'), message: data.answer, isSelf: false }))
+    }
+
+    if (isError && error) {
+      toast.error(error)
+    }
+
+
+  }, [data, isSuccess, isError, error])
+
+
+
+
   return (
-    <div class="min-h-screen bg-parchment flex flex-col">
+    <div className="min-h-screen bg-parchment flex flex-col">
       <Navbar activePage="admin" />
 
-      <div class="flex-1 flex">
+      <div className="flex-1 flex">
         <Sidebar activeTab="admin_ai" role="admin" />
-
-        <main class="flex-1 p-8 bg-grid-pattern overflow-y-auto">
-          <div class="mb-8">
-            <div class="inline-block bg-yellow border-3 border-navy px-3 py-1 rounded-full shadow-pop-sm font-mono text-xs font-bold text-navy mb-2">
-              AI ENGINE PROMPTS
-            </div>
-            <h1 class="font-grotesk font-extrabold text-3xl text-navy">
-              AI Roadmap <span class="text-rust">Prompt Configuration</span>
-            </h1>
-            <p class="font-body text-sm text-navy-muted mt-1">
-              Tune system prompts, tokens usage budgets, and model parameters for the CareerBridge AI generator.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2">
-              <div class="bg-parchment-card border-4 border-navy rounded-3xl p-6 shadow-pop space-y-6">
-                <div>
-                  <label class="block font-grotesk font-extrabold text-sm uppercase text-navy mb-2">
-                    Global System Prompt Instruction
-                  </label>
-                  <textarea
-                    rows={6}
-                    defaultValue="You are CareerBridge AI, an expert career advisor specializing in the Indian job market. Always structure roadmaps in 4 distinct phases (Foundations, Core Stack, Real-World Projects, Placement & Salary Prep). Benchmarks must reflect realistic INR packages in Indian tech hubs."
-                    class="w-full bg-parchment border-3 border-navy rounded-xl p-4 font-mono text-xs text-navy shadow-pop-sm focus:outline-none"
-                  ></textarea>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                  <div>
-                    <label class="block font-grotesk font-bold text-xs uppercase text-navy mb-1">
-                      Model Temperature
-                    </label>
-                    <input
-                      type="text"
-                      defaultValue="0.4 (Balanced & Precise)"
-                      class="w-full bg-parchment border-3 border-navy rounded-xl px-4 py-2 font-mono text-xs text-navy shadow-pop-sm"
-                    />
-                  </div>
-
-                  <div>
-                    <label class="block font-grotesk font-bold text-xs uppercase text-navy mb-1">
-                      Max Output Tokens
-                    </label>
-                    <input
-                      type="text"
-                      defaultValue="2,048 Tokens"
-                      class="w-full bg-parchment border-3 border-navy rounded-xl px-4 py-2 font-mono text-xs text-navy shadow-pop-sm"
-                    />
-                  </div>
-                </div>
-
-                <div class="pt-4 border-t-2 border-navy/20 flex justify-end">
-                  <Button variant="primary" size="md">
-                    Save AI Prompt Config 💾
-                  </Button>
-                </div>
+        <div className="flex-1 flex flex-col justify-between bg-parchment-card">
+          {/* Chat Window Header */}
+          <div className="p-4 border-b-4 border-navy bg-yellow/30 flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 rounded-xl bg-sky border-2 border-navy flex items-center justify-center font-grotesk font-extrabold text-sm text-navy">
+                A.I
               </div>
-            </div>
-
-            <div class="space-y-6">
-              <div class="bg-yellow border-4 border-navy rounded-3xl p-6 shadow-pop">
-                <StatusBadge text="TOKEN USAGE" status="success" />
-                <h3 class="font-grotesk font-extrabold text-xl text-navy mt-3">Daily AI Cost Metrics</h3>
-                <div class="mt-4 space-y-2 font-mono text-xs text-navy">
-                  <div class="flex justify-between">
-                    <span>• Roadmaps Today:</span>
-                    <span class="font-bold">412 calls</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span>• Avg Token Latency:</span>
-                    <span class="font-bold">1.2 seconds</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span>• API Model Cost:</span>
-                    <span class="font-bold text-rust">$4.20 / day</span>
-                  </div>
-                </div>
+              <div>
+                <h2 className="font-grotesk font-extrabold text-base text-navy">{isPending ? "Thinking...." : "A.I Assistant"}</h2>
               </div>
             </div>
           </div>
-        </main>
+
+          {/* Chat Messages Log */}
+          <div className="p-6 overflow-y-auto space-y-4 max-h-[460px] bg-grid-pattern">
+            {messages?.map((msg) => (
+              <ChatBubble key={msg.id} sender={msg.sender} time={msg.time} message={msg.message} isSelf={msg.isSelf} />
+            ))}
+          </div>
+
+          {/* Chat Input Bar */}
+          <div className="p-4 border-t-4 border-navy bg-parchment">
+            <form onSubmit={handleSubmit} className="flex items-center space-x-3">
+              <input
+                onChange={(e) => setText(e.target.value)}
+                type="text"
+                defaultValue={text}
+                placeholder="Type your message here..."
+                className="flex-1 bg-white border-3 border-navy rounded-xl px-4 py-2.5 font-body text-sm text-navy shadow-pop-sm focus:outline-none"
+              />
+              <Button type='submit' variant="primary" size="md">
+                Send Message ➔
+              </Button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );

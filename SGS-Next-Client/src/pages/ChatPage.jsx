@@ -20,43 +20,42 @@ export default function ChatPage() {
   ];
 
   return (
-    <div class="min-h-screen bg-parchment flex flex-col">
+    <div className="min-h-screen bg-parchment flex flex-col">
       <Navbar activePage="messages" />
 
-      <div class="flex-1 flex">
+      <div className="flex-1 flex">
         <Sidebar activeTab="messages" role="student" />
 
-        <main class="flex-1 p-8 bg-grid-pattern overflow-y-auto flex">
-          <div class="w-full bg-parchment-card border-4 border-navy rounded-3xl shadow-pop flex flex-col lg:flex-row overflow-hidden min-h-[650px]">
+        <main className="flex-1 p-8 bg-grid-pattern overflow-y-auto flex">
+          <div className="w-full bg-parchment-card border-4 border-navy rounded-3xl shadow-pop flex flex-col lg:flex-row overflow-hidden min-h-[650px]">
             {/* Left Chat Sidebar */}
-            <div class="w-full lg:w-80 border-b-4 lg:border-b-0 lg:border-r-4 border-navy bg-parchment p-4 flex flex-col justify-between">
+            <div className="w-full lg:w-80 border-b-4 lg:border-b-0 lg:border-r-4 border-navy bg-parchment p-4 flex flex-col justify-between">
               <div>
-                <div class="font-grotesk font-extrabold text-lg text-navy mb-3">Messages & Chats</div>
+                <div className="font-grotesk font-extrabold text-lg text-navy mb-3">Messages & Chats</div>
                 <input
                   type="text"
                   placeholder="Search conversations..."
-                  class="w-full bg-white border-2 border-navy rounded-xl px-3 py-2 font-body text-xs text-navy shadow-pop-sm mb-4 focus:outline-none"
+                  className="w-full bg-white border-2 border-navy rounded-xl px-3 py-2 font-body text-xs text-navy shadow-pop-sm mb-4 focus:outline-none"
                 />
 
-                <div class="space-y-2">
+                <div className="space-y-2">
                   {conversations.map((c) => (
                     <div
                       key={c.id}
-                      class={`p-3 rounded-2xl border-2 border-navy cursor-pointer transition-all flex items-center justify-between ${
-                        c.active ? 'bg-yellow shadow-pop-sm' : 'bg-white hover:bg-parchment-dim'
-                      }`}
+                      className={`p-3 rounded-2xl border-2 border-navy cursor-pointer transition-all flex items-center justify-between ${c.active ? 'bg-yellow shadow-pop-sm' : 'bg-white hover:bg-parchment-dim'
+                        }`}
                     >
-                      <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-xl bg-sky border-2 border-navy flex items-center justify-center font-grotesk font-extrabold text-sm text-navy shadow-pop-sm">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 rounded-xl bg-sky border-2 border-navy flex items-center justify-center font-grotesk font-extrabold text-sm text-navy shadow-pop-sm">
                           {c.avatar}
                         </div>
                         <div>
-                          <div class="font-grotesk font-extrabold text-sm text-navy">{c.name}</div>
-                          <div class="font-mono text-[10px] text-navy-muted">{c.role}</div>
+                          <div className="font-grotesk font-extrabold text-sm text-navy">{c.name}</div>
+                          <div className="font-mono text-[10px] text-navy-muted">{c.role}</div>
                         </div>
                       </div>
                       {c.unread > 0 && (
-                        <span class="w-5 h-5 rounded-full bg-rust text-white font-mono text-[10px] font-bold flex items-center justify-center border border-navy">
+                        <span className="w-5 h-5 rounded-full bg-rust text-white font-mono text-[10px] font-bold flex items-center justify-center border border-navy">
                           {c.unread}
                         </span>
                       )}
@@ -65,25 +64,25 @@ export default function ChatPage() {
                 </div>
               </div>
 
-              <div class="bg-rust-container border-2 border-navy p-3 rounded-xl mt-4 text-xs font-mono">
-                <span class="font-bold text-navy">💡 Quick Tip:</span> Share your GitHub link before every mentorship session.
+              <div className="bg-rust-container border-2 border-navy p-3 rounded-xl mt-4 text-xs font-mono">
+                <span className="font-bold text-navy">💡 Quick Tip:</span> Share your GitHub link before every mentorship session.
               </div>
             </div>
 
             {/* Right Main Chat Window */}
-            <div class="flex-1 flex flex-col justify-between bg-parchment-card">
+            <div className="flex-1 flex flex-col justify-between bg-parchment-card">
               {/* Chat Window Header */}
-              <div class="p-4 border-b-4 border-navy bg-yellow/30 flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                  <div class="w-10 h-10 rounded-xl bg-sky border-2 border-navy flex items-center justify-center font-grotesk font-extrabold text-sm text-navy">
+              <div className="p-4 border-b-4 border-navy bg-yellow/30 flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 rounded-xl bg-sky border-2 border-navy flex items-center justify-center font-grotesk font-extrabold text-sm text-navy">
                     RK
                   </div>
                   <div>
-                    <h2 class="font-grotesk font-extrabold text-base text-navy">Dr. Ramesh Kumar</h2>
-                    <p class="font-mono text-[10px] text-navy-muted">Online • Next Session: Tomorrow 5:00 PM IST</p>
+                    <h2 className="font-grotesk font-extrabold text-base text-navy">Dr. Ramesh Kumar</h2>
+                    <p className="font-mono text-[10px] text-navy-muted">Online • Next Session: Tomorrow 5:00 PM IST</p>
                   </div>
                 </div>
-                <div class="flex items-center space-x-2">
+                <div className="flex items-center space-x-2">
                   <StatusBadge text="ACTIVE MENTORSHIP" status="success" />
                   <Button variant="outline" size="sm">
                     Book Extension
@@ -92,18 +91,18 @@ export default function ChatPage() {
               </div>
 
               {/* Chat Messages Log */}
-              <div class="p-6 overflow-y-auto space-y-4 max-h-[460px] bg-grid-pattern">
+              <div className="p-6 overflow-y-auto space-y-4 max-h-[460px] bg-grid-pattern">
                 {messages.map((msg) => (
                   <ChatBubble key={msg.id} sender={msg.sender} time={msg.time} message={msg.message} isSelf={msg.isSelf} />
                 ))}
               </div>
 
               {/* Chat Input Bar */}
-              <div class="p-4 border-t-4 border-navy bg-parchment">
-                <form class="flex items-center space-x-3">
+              <div className="p-4 border-t-4 border-navy bg-parchment">
+                <form className="flex items-center space-x-3">
                   <button
                     type="button"
-                    class="p-2.5 bg-white border-2 border-navy rounded-xl hover:bg-parchment-dim shadow-pop-sm font-mono text-sm"
+                    className="p-2.5 bg-white border-2 border-navy rounded-xl hover:bg-parchment-dim shadow-pop-sm font-mono text-sm"
                   >
                     📎
                   </button>
@@ -111,7 +110,7 @@ export default function ChatPage() {
                     type="text"
                     defaultValue="Thanks Dr. Ramesh! I will push the indexed MongoDB queries now."
                     placeholder="Type your message here..."
-                    class="flex-1 bg-white border-3 border-navy rounded-xl px-4 py-2.5 font-body text-sm text-navy shadow-pop-sm focus:outline-none"
+                    className="flex-1 bg-white border-3 border-navy rounded-xl px-4 py-2.5 font-body text-sm text-navy shadow-pop-sm focus:outline-none"
                   />
                   <Button variant="primary" size="md">
                     Send Message ➔
