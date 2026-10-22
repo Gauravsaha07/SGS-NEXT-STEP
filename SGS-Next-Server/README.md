@@ -230,8 +230,8 @@ PORT=5000
 MONGO_URI=mongodb://localhost:27017/next-step
 JWT_ACCESS_SECRET=your_access_secret
 JWT_REFRESH_SECRET=your_refresh_secret
-CLIENT_URL=http://localhost:5173
-SOCKET_CORS_ORIGIN=http://localhost:5173
+CLIENT_URL=http://localhost:5511
+SOCKET_CORS_ORIGIN=http://localhost:5511
 ```
 
 ---
